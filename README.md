@@ -1,2 +1,2 @@
-# 18WSD030-Advcanced-Project
+# 18WSD030-Advanced-Project
 Repository for my Advanced Project
