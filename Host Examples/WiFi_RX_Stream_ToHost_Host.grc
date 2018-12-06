@@ -411,7 +411,7 @@
     <key>zeromq_pull_source</key>
     <param>
       <key>address</key>
-      <value>tcp://192.168.10.2:9998</value>
+      <value>tcp://192.168.10.2:9995</value>
     </param>
     <param>
       <key>alias</key>
