@@ -15,5 +15,5 @@ This project will investigate the effectiveness of multiple antennas on wireless
  *Current Progress*
 
 - CW Rx Target and Host
-- FM audio Tx Target 
+- FM audio Tx Target (SISO)
 - FM audio Rx Target and Host (SISO - still missing SIMO implementation)
