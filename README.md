@@ -2,4 +2,18 @@
 
 Repository for my Advanced Project.
 
-It focuses on diversity techniques concerning riverside _WSNs_.
+*Diversity Techniques for riverside Wireless Sensor Nodes over Software Defined Radios*
+
+**Project Description** 
+
+This project will investigate the effectiveness of multiple antennas on wireless sensor nodes to improve radiofrequency reliability. Different diversity techniques will be investigated, and a suggestion as to which is the most suitable will be made. During the project, the student will model and measure a multiple input single output system. Firstly in a lab and secondly outdoors. The platform used will be software defined radios. 
+
+**Project Aim** 
+
+ To measure the effectiveness of using multiple antennas on sensor nodes close to, and upon water using software defined radios.   
+ 
+ *Current Progress*
+
+- CW Rx Target and Host
+- FM audio Tx Target 
+- FM audio Rx Target and Host (SISO - still missing SIMO implementation)
