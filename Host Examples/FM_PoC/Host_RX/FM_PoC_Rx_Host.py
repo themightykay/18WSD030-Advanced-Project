@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Thu Dec  6 21:21:40 2018
+# Generated: Fri Dec  7 14:11:28 2018
 ##################################################
 
 from distutils.version import StrictVersion
@@ -148,7 +148,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         self.channel_1_stream_pull_0 = zeromq.pull_source(gr.sizeof_float, 1, 'tcp://192.168.10.2:9997', 100, False, -1)
         self.channel_1_stream_pull = zeromq.pull_source(gr.sizeof_gr_complex, 1, 'tcp://192.168.10.2:9999', 100, False, -1)
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((audio_gain, ))
-        self.audio_sink_0 = audio.sink(samp_rate, '', True)
+        self.audio_sink_0 = audio.sink(48000, '', True)
 
         ##################################################
         # Connections
