@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Mon Aug 20 18:29:37 2007
+# Generated: Sat Jul  7 17:28:00 2007
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import time
 
 class I433_FM_Rx(gr.top_block):
 
-    def __init__(self, freq=433e6, rx_gain=50):
+    def __init__(self, freq=434e6, rx_gain=100):
         gr.top_block.__init__(self, "FM audio 433 RX")
 
         ##################################################
@@ -66,7 +66,7 @@ class I433_FM_Rx(gr.top_block):
         self.uhd_usrp_source_0.set_bandwidth(200e3, 0)
         (self.uhd_usrp_source_0).set_max_output_buffer(1000000)
         self.low_pass_filter_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
-        	1, samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        	1, samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.blks2_wfm_rcv_0 = analog.wfm_rcv(
         	quad_rate=samp_rate/lpf_decim,
         	audio_decimation=1,
@@ -122,7 +122,7 @@ class I433_FM_Rx(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_lpf_decim(self):
@@ -141,10 +141,10 @@ class I433_FM_Rx(gr.top_block):
 def argument_parser():
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     parser.add_option(
-        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(433e6),
+        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(434e6),
         help="Set freq [default=%default]")
     parser.add_option(
-        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(50),
+        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(100),
         help="Set rx_gain [default=%default]")
     return parser
 
