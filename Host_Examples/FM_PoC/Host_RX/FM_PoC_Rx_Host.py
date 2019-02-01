@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Mon Jan 28 19:07:51 2019
+# Generated: Fri Feb  1 21:22:07 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -72,14 +72,14 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate = samp_rate = 44100
         self.rx_gain = rx_gain = 0
-        self.freq = freq = 430e6
+        self.freq = freq = 434e6
         self.bw = bw = 1e6
         self.audio_gain = audio_gain = 0.5
 
         ##################################################
         # Blocks
         ##################################################
-        self._freq_range = Range(70e6, 3000e6, 10e6, 430e6, 200)
+        self._freq_range = Range(70e6, 3000e6, 10e6, 434e6, 200)
         self._freq_win = RangeWidget(self._freq_range, self.set_freq, 'Frequency (Hz)', "slider", float)
         self.top_grid_layout.addWidget(self._freq_win, 0, 0, 1, 1)
         [self.top_grid_layout.setRowStretch(r,1) for r in range(0,1)]
