@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Sat Jul  7 17:28:00 2007
+# Generated: Tue Jul 10 16:50:23 2007
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import time
 
 class I433_FM_Rx(gr.top_block):
 
-    def __init__(self, freq=434e6, rx_gain=100):
+    def __init__(self, freq=434e6, rx_gain=60):
         gr.top_block.__init__(self, "FM audio 433 RX")
 
         ##################################################
@@ -144,7 +144,7 @@ def argument_parser():
         "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(434e6),
         help="Set freq [default=%default]")
     parser.add_option(
-        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(100),
+        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(60),
         help="Set rx_gain [default=%default]")
     return parser
 
