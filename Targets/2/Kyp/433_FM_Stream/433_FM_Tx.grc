@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.11'?>
+<?grc format='1' created='3.7.9'?>
 <flow_graph>
   <timestamp>Thu Dec  6 18:21:26 2018</timestamp>
   <block>
     <key>options</key>
     <param>
       <key>author</key>
-      <value>KD - 6/12/18</value>
+      <value>KD - 28/1/19</value>
     </param>
     <param>
       <key>window_size</key>
@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value></value>
+      <value>433Mz FM audio Tx</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>FM_PoC_Tx</value>
+      <value>I433_FM_Tx</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -78,7 +78,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>FM PoC Tx host</value>
+      <value>433 FM audio Tx to host</value>
     </param>
   </block>
   <block>
@@ -132,7 +132,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>44100</value>
+      <value>250e3</value>
     </param>
   </block>
   <block>
@@ -143,7 +143,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -159,7 +159,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>"192.168.10.2"</value>
+      <value>"192.168.9.2"</value>
     </param>
   </block>
   <block>
@@ -170,7 +170,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -234,10 +234,6 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-    <param>
-      <key>fh</key>
-      <value>-1.0</value>
     </param>
     <param>
       <key>quad_rate</key>
@@ -319,7 +315,7 @@
     </param>
     <param>
       <key>file</key>
-      <value>/home/kyp/Documents/18WSD030-Advanced-Project/Target/Kyp/FM_PoC/Casio-MT-45-16-Beat.wav</value>
+      <value>/home/root/grc_programs/Kyp/433_FM_Stream/voice_sample.wav</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -390,7 +386,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>430e6</value>
+      <value>434e6</value>
     </param>
   </block>
   <block>
@@ -457,7 +453,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>250000</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>width</key>
@@ -496,7 +492,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 156)</value>
+      <value>(592, 167)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -543,7 +539,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(96, 196)</value>
+      <value>(104, 190)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -567,7 +563,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>50</value>
+      <value>10</value>
     </param>
   </block>
   <block>
@@ -582,7 +578,7 @@
     </param>
     <param>
       <key>bw0</key>
-      <value>0</value>
+      <value>200e3</value>
     </param>
     <param>
       <key>center_freq0</key>
@@ -1242,7 +1238,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 316)</value>
+      <value>(744, 320)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1362,14 +1358,10 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>250000</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>hide_cmd_port</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>hide_lo_controls</key>
       <value>True</value>
     </param>
     <param>
@@ -1409,7 +1401,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
