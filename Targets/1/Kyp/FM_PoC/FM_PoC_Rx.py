@@ -5,7 +5,7 @@
 # Title: FM audio PoC RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 430MHz
-# Generated: Fri Aug 17 14:23:03 2007
+# Generated: Tue Jul 10 17:54:22 2007
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import time
 
 class FM_PoC_Rx(gr.top_block):
 
-    def __init__(self, freq=430e6, rx_gain=50):
+    def __init__(self, freq=434e6, rx_gain=50):
         gr.top_block.__init__(self, "FM audio PoC RX")
 
         ##################################################
@@ -47,6 +47,7 @@ class FM_PoC_Rx(gr.top_block):
         ##################################################
         self.zeromq_push_sink_0_0_0_0 = zeromq.push_sink(gr.sizeof_gr_complex, 1, "tcp://*:9995", 100, False)
         self.zeromq_push_sink_0_0_0 = zeromq.push_sink(gr.sizeof_gr_complex, 1, "tcp://*:9999", 100, False)
+        self.zeromq_push_sink_0_0 = zeromq.push_sink(gr.sizeof_float, 1, "tcp://*:9993", 100, False)
         self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_float, 1, "tcp://*:9997", 100, False)
         self.xmlrpc_server_0 = SimpleXMLRPCServer.SimpleXMLRPCServer((str(server_address), int(server_port)), allow_none=True)
         self.xmlrpc_server_0.register_instance(self)
@@ -70,11 +71,23 @@ class FM_PoC_Rx(gr.top_block):
         self.uhd_usrp_source_0.set_antenna("RX2", 1)
         self.uhd_usrp_source_0.set_bandwidth(200e3, 1)
         (self.uhd_usrp_source_0).set_max_output_buffer(1000000)
+        self.low_pass_filter_0_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
+        	1, samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
         self.low_pass_filter_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
         	1, samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        self.blks2_wfm_rcv_0_0 = analog.wfm_rcv(
+        	quad_rate=samp_rate/lpf_decim,
+        	audio_decimation=1,
+        )
         self.blks2_wfm_rcv_0 = analog.wfm_rcv(
         	quad_rate=samp_rate/lpf_decim,
         	audio_decimation=1,
+        )
+        self.blks2_rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
+                interpolation=48,
+                decimation=int(samp_rate/lpf_decim/1000),
+                taps=None,
+                fractional_bw=None,
         )
         self.blks2_rational_resampler_xxx_0 = filter.rational_resampler_fff(
                 interpolation=48,
@@ -87,9 +100,13 @@ class FM_PoC_Rx(gr.top_block):
         # Connections
         ##################################################
         self.connect((self.blks2_rational_resampler_xxx_0, 0), (self.zeromq_push_sink_0, 0))    
+        self.connect((self.blks2_rational_resampler_xxx_0_0, 0), (self.zeromq_push_sink_0_0, 0))    
         self.connect((self.blks2_wfm_rcv_0, 0), (self.blks2_rational_resampler_xxx_0, 0))    
+        self.connect((self.blks2_wfm_rcv_0_0, 0), (self.blks2_rational_resampler_xxx_0_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.blks2_wfm_rcv_0, 0))    
+        self.connect((self.low_pass_filter_0_0, 0), (self.blks2_wfm_rcv_0_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.low_pass_filter_0, 0))    
+        self.connect((self.uhd_usrp_source_0, 1), (self.low_pass_filter_0_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.zeromq_push_sink_0_0_0, 0))    
         self.connect((self.uhd_usrp_source_0, 1), (self.zeromq_push_sink_0_0_0_0, 0))    
 
@@ -128,8 +145,9 @@ class FM_PoC_Rx(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
 
     def get_lpf_decim(self):
         return self.lpf_decim
@@ -147,7 +165,7 @@ class FM_PoC_Rx(gr.top_block):
 def argument_parser():
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     parser.add_option(
-        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(430e6),
+        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(434e6),
         help="Set freq [default=%default]")
     parser.add_option(
         "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(50),
