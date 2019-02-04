@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
-# Title: FM audio PoC RX
+# Title: FM audio 433 RX
 # Author: KD - 6/12/18
-# Description: FM audio file Rx at 430MHz
-# Generated: Fri Aug 17 14:23:03 2007
+# Description: FM audio file Rx at 433 MHz
+# Generated: Fri Aug 24 14:18:46 2007
 ##################################################
 
 from gnuradio import analog
@@ -22,10 +22,10 @@ import threading
 import time
 
 
-class FM_PoC_Rx(gr.top_block):
+class I433_FM_Rx(gr.top_block):
 
-    def __init__(self, freq=430e6, rx_gain=50):
-        gr.top_block.__init__(self, "FM audio PoC RX")
+    def __init__(self, freq=433.8e6, rx_gain=50):
+        gr.top_block.__init__(self, "FM audio 433 RX")
 
         ##################################################
         # Parameters
@@ -45,7 +45,6 @@ class FM_PoC_Rx(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.zeromq_push_sink_0_0_0_0 = zeromq.push_sink(gr.sizeof_gr_complex, 1, "tcp://*:9995", 100, False)
         self.zeromq_push_sink_0_0_0 = zeromq.push_sink(gr.sizeof_gr_complex, 1, "tcp://*:9999", 100, False)
         self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_float, 1, "tcp://*:9997", 100, False)
         self.xmlrpc_server_0 = SimpleXMLRPCServer.SimpleXMLRPCServer((str(server_address), int(server_port)), allow_none=True)
@@ -57,7 +56,7 @@ class FM_PoC_Rx(gr.top_block):
         	",".join(("", "")),
         	uhd.stream_args(
         		cpu_format="fc32",
-        		channels=range(2),
+        		channels=range(1),
         	),
         )
         self.uhd_usrp_source_0.set_samp_rate(samp_rate)
@@ -65,10 +64,6 @@ class FM_PoC_Rx(gr.top_block):
         self.uhd_usrp_source_0.set_gain(rx_gain, 0)
         self.uhd_usrp_source_0.set_antenna("RX2", 0)
         self.uhd_usrp_source_0.set_bandwidth(200e3, 0)
-        self.uhd_usrp_source_0.set_center_freq(freq, 1)
-        self.uhd_usrp_source_0.set_gain(rx_gain, 1)
-        self.uhd_usrp_source_0.set_antenna("RX2", 1)
-        self.uhd_usrp_source_0.set_bandwidth(200e3, 1)
         (self.uhd_usrp_source_0).set_max_output_buffer(1000000)
         self.low_pass_filter_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
         	1, samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
@@ -91,7 +86,6 @@ class FM_PoC_Rx(gr.top_block):
         self.connect((self.low_pass_filter_0, 0), (self.blks2_wfm_rcv_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.zeromq_push_sink_0_0_0, 0))    
-        self.connect((self.uhd_usrp_source_0, 1), (self.zeromq_push_sink_0_0_0_0, 0))    
 
     def get_freq(self):
         return self.freq
@@ -147,7 +141,7 @@ class FM_PoC_Rx(gr.top_block):
 def argument_parser():
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     parser.add_option(
-        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(430e6),
+        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(433.8e6),
         help="Set freq [default=%default]")
     parser.add_option(
         "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(50),
@@ -155,7 +149,7 @@ def argument_parser():
     return parser
 
 
-def main(top_block_cls=FM_PoC_Rx, options=None):
+def main(top_block_cls=I433_FM_Rx, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
