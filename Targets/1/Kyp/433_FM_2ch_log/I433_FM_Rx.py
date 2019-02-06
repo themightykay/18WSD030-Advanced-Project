@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Tue Jul 10 17:15:46 2007
+# Generated: Thu Jul 12 15:11:08 2007
 ##################################################
 
 from gnuradio import blocks
@@ -37,7 +37,7 @@ class I433_FM_Rx(gr.top_block):
         ##################################################
         self.server_port = server_port = 30000
         self.server_address = server_address = "192.168.10.2"
-        self.samp_rate = samp_rate = 2e6
+        self.samp_rate = samp_rate = 1e6
         self.lpf_decim = lpf_decim = 4
         self.audio_samp_rate = audio_samp_rate = 44.1e3
 
@@ -56,6 +56,7 @@ class I433_FM_Rx(gr.top_block):
         		channels=range(2),
         	),
         )
+        self.uhd_usrp_source_0.set_subdev_spec("A:A A:B", 0)
         self.uhd_usrp_source_0.set_samp_rate(samp_rate)
         self.uhd_usrp_source_0.set_center_freq(freq, 0)
         self.uhd_usrp_source_0.set_gain(rx_gain, 0)
@@ -120,9 +121,9 @@ class I433_FM_Rx(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
 
     def get_lpf_decim(self):
         return self.lpf_decim

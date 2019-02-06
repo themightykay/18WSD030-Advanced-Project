@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Tue Jul 10 16:50:23 2007
+# Generated: Thu Jul 12 10:35:53 2007
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import time
 
 class I433_FM_Rx(gr.top_block):
 
-    def __init__(self, freq=434e6, rx_gain=60):
+    def __init__(self, freq=434e6, rx_gain=100):
         gr.top_block.__init__(self, "FM audio 433 RX")
 
         ##################################################
@@ -45,7 +45,6 @@ class I433_FM_Rx(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.zeromq_push_sink_0_0_0 = zeromq.push_sink(gr.sizeof_gr_complex, 1, "tcp://*:9999", 100, False)
         self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_float, 1, "tcp://*:9997", 100, False)
         self.xmlrpc_server_0 = SimpleXMLRPCServer.SimpleXMLRPCServer((str(server_address), int(server_port)), allow_none=True)
         self.xmlrpc_server_0.register_instance(self)
@@ -85,7 +84,6 @@ class I433_FM_Rx(gr.top_block):
         self.connect((self.blks2_wfm_rcv_0, 0), (self.blks2_rational_resampler_xxx_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.blks2_wfm_rcv_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.low_pass_filter_0, 0))    
-        self.connect((self.uhd_usrp_source_0, 0), (self.zeromq_push_sink_0_0_0, 0))    
 
     def get_freq(self):
         return self.freq
@@ -144,7 +142,7 @@ def argument_parser():
         "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(434e6),
         help="Set freq [default=%default]")
     parser.add_option(
-        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(60),
+        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(100),
         help="Set rx_gain [default=%default]")
     return parser
 
