@@ -303,7 +303,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(840, 455)</value>
+      <value>(856, 455)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -491,7 +491,7 @@
     </param>
     <param>
       <key>cutoff_freq</key>
-      <value>100e3</value>
+      <value>7e3</value>
     </param>
     <param>
       <key>decim</key>
@@ -507,7 +507,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(456, 130)</value>
+      <value>(456, 138)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -539,7 +539,7 @@
     </param>
     <param>
       <key>width</key>
-      <value>10e3</value>
+      <value>7e3</value>
     </param>
     <param>
       <key>win</key>
@@ -566,7 +566,7 @@
     </param>
     <param>
       <key>cutoff_freq</key>
-      <value>100e3</value>
+      <value>7e3</value>
     </param>
     <param>
       <key>decim</key>
@@ -582,7 +582,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(456, 426)</value>
+      <value>(456, 434)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -614,7 +614,7 @@
     </param>
     <param>
       <key>width</key>
-      <value>10e3</value>
+      <value>7e3</value>
     </param>
     <param>
       <key>win</key>
@@ -661,7 +661,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>50</value>
+      <value>100</value>
     </param>
   </block>
   <block>
@@ -1612,7 +1612,7 @@
     </param>
     <param>
       <key>sd_spec0</key>
-      <value></value>
+      <value>A:A A:B</value>
     </param>
     <param>
       <key>time_source0</key>
@@ -1853,7 +1853,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1032, 462)</value>
+      <value>(1056, 462)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1904,7 +1904,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(624, 262)</value>
+      <value>(624, 294)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1955,7 +1955,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(616, 366)</value>
+      <value>(624, 366)</value>
     </param>
     <param>
       <key>_rotation</key>

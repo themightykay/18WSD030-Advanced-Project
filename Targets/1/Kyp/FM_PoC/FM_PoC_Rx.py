@@ -5,7 +5,7 @@
 # Title: FM audio PoC RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 430MHz
-# Generated: Tue Jul 10 17:54:22 2007
+# Generated: Thu Jul 12 15:05:15 2007
 ##################################################
 
 from gnuradio import analog
@@ -24,7 +24,7 @@ import time
 
 class FM_PoC_Rx(gr.top_block):
 
-    def __init__(self, freq=434e6, rx_gain=50):
+    def __init__(self, freq=434e6, rx_gain=100):
         gr.top_block.__init__(self, "FM audio PoC RX")
 
         ##################################################
@@ -61,6 +61,7 @@ class FM_PoC_Rx(gr.top_block):
         		channels=range(2),
         	),
         )
+        self.uhd_usrp_source_0.set_subdev_spec("A:A A:B", 0)
         self.uhd_usrp_source_0.set_samp_rate(samp_rate)
         self.uhd_usrp_source_0.set_center_freq(freq, 0)
         self.uhd_usrp_source_0.set_gain(rx_gain, 0)
@@ -72,9 +73,9 @@ class FM_PoC_Rx(gr.top_block):
         self.uhd_usrp_source_0.set_bandwidth(200e3, 1)
         (self.uhd_usrp_source_0).set_max_output_buffer(1000000)
         self.low_pass_filter_0_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
-        	1, samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        	1, samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.low_pass_filter_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
-        	1, samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        	1, samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.blks2_wfm_rcv_0_0 = analog.wfm_rcv(
         	quad_rate=samp_rate/lpf_decim,
         	audio_decimation=1,
@@ -146,8 +147,8 @@ class FM_PoC_Rx(gr.top_block):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
-        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 100e3, 10e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
 
     def get_lpf_decim(self):
         return self.lpf_decim
@@ -168,7 +169,7 @@ def argument_parser():
         "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(434e6),
         help="Set freq [default=%default]")
     parser.add_option(
-        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(50),
+        "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(100),
         help="Set rx_gain [default=%default]")
     return parser
 
