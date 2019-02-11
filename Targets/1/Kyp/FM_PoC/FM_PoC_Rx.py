@@ -5,7 +5,7 @@
 # Title: FM audio PoC RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 430MHz
-# Generated: Thu Jul 12 15:05:15 2007
+# Generated: Fri Jul 13 09:40:57 2007
 ##################################################
 
 from gnuradio import analog
@@ -74,8 +74,10 @@ class FM_PoC_Rx(gr.top_block):
         (self.uhd_usrp_source_0).set_max_output_buffer(1000000)
         self.low_pass_filter_0_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
         	1, samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        (self.low_pass_filter_0_0).set_max_output_buffer(1000000)
         self.low_pass_filter_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
         	1, samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        (self.low_pass_filter_0).set_max_output_buffer(1000000)
         self.blks2_wfm_rcv_0_0 = analog.wfm_rcv(
         	quad_rate=samp_rate/lpf_decim,
         	audio_decimation=1,
@@ -146,9 +148,9 @@ class FM_PoC_Rx(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_lpf_decim(self):
         return self.lpf_decim
