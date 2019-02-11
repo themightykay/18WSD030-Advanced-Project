@@ -527,7 +527,7 @@
     </param>
     <param>
       <key>maxoutbuf</key>
-      <value>0</value>
+      <value>1000000</value>
     </param>
     <param>
       <key>minoutbuf</key>
@@ -602,7 +602,7 @@
     </param>
     <param>
       <key>maxoutbuf</key>
-      <value>0</value>
+      <value>1000000</value>
     </param>
     <param>
       <key>minoutbuf</key>

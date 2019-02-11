@@ -93,7 +93,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -134,6 +134,69 @@
     <param>
       <key>stop</key>
       <value>1000</value>
+    </param>
+    <param>
+      <key>rangeType</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>dial</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0.5</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(592, 468)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value>2,1,1,1</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>audio_gain</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Audio Gain</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>100</value>
     </param>
     <param>
       <key>rangeType</key>
@@ -215,7 +278,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>434e6</value>
+      <value>433e6</value>
     </param>
     <param>
       <key>_enabled</key>
