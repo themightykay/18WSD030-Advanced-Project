@@ -5,7 +5,7 @@
 # Title: 433 FM audio Tx to host
 # Author: KD - 28/1/19
 # Description: 433Mz FM audio Tx
-# Generated: Mon Aug 27 13:06:11 2007
+# Generated: Mon Aug 27 16:13:56 2007
 ##################################################
 
 from gnuradio import analog
@@ -54,14 +54,14 @@ class I433_FM_Tx(gr.top_block):
         self.uhd_usrp_sink_0.set_bandwidth(200e3, 0)
         self.rational_resampler_xxx_0 = filter.rational_resampler_fff(
                 interpolation=625,
-                decimation=411,
+                decimation=441,
                 taps=None,
                 fractional_bw=None,
         )
         self.low_pass_filter_0 = filter.fir_filter_ccf(1, firdes.low_pass(
         	0.9, samp_rate, 100000, 10000, firdes.WIN_HAMMING, 6.76))
         self.blocks_wavfile_source_0 = blocks.wavfile_source("/home/root/grc_programs/Kyp/433_FM_Stream/voice_sample.wav", True)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((0.5, ))
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((1, ))
         self.analog_wfm_tx_0 = analog.wfm_tx(
         	audio_rate=62500,
         	quad_rate=250000,

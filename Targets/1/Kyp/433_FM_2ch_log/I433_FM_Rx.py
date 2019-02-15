@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Fri Jul 13 07:54:31 2007
+# Generated: Wed Jul 18 10:25:31 2007
 ##################################################
 
 from gnuradio import blocks
@@ -121,9 +121,9 @@ class I433_FM_Rx(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
-        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_lpf_decim(self):
         return self.lpf_decim

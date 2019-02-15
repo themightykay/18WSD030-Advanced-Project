@@ -232,7 +232,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>int(samp_rate/lpf_decim/1000)</value>
+      <value>2500</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -256,7 +256,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>882</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -291,7 +291,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>int(samp_rate/lpf_decim/1000)</value>
+      <value>2500</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -315,7 +315,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>48</value>
+      <value>882</value>
     </param>
     <param>
       <key>maxoutbuf</key>

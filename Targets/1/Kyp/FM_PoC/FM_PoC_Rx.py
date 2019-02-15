@@ -5,7 +5,7 @@
 # Title: FM audio PoC RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 430MHz
-# Generated: Fri Jul 13 09:40:57 2007
+# Generated: Fri Jul 13 12:18:38 2007
 ##################################################
 
 from gnuradio import analog
@@ -87,14 +87,14 @@ class FM_PoC_Rx(gr.top_block):
         	audio_decimation=1,
         )
         self.blks2_rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=int(samp_rate/lpf_decim/1000),
+                interpolation=441,
+                decimation=1250,
                 taps=None,
                 fractional_bw=None,
         )
         self.blks2_rational_resampler_xxx_0 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=int(samp_rate/lpf_decim/1000),
+                interpolation=441,
+                decimation=1250,
                 taps=None,
                 fractional_bw=None,
         )

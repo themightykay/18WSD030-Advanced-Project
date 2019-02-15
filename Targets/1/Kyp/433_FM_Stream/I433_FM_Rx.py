@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Thu Jul 12 10:35:53 2007
+# Generated: Wed Jul 18 09:37:12 2007
 ##################################################
 
 from gnuradio import analog
@@ -45,6 +45,7 @@ class I433_FM_Rx(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
+        self.zeromq_push_sink_0_0_0 = zeromq.push_sink(gr.sizeof_gr_complex, 1, "tcp://*:9999", 100, False)
         self.zeromq_push_sink_0 = zeromq.push_sink(gr.sizeof_float, 1, "tcp://*:9997", 100, False)
         self.xmlrpc_server_0 = SimpleXMLRPCServer.SimpleXMLRPCServer((str(server_address), int(server_port)), allow_none=True)
         self.xmlrpc_server_0.register_instance(self)
@@ -84,6 +85,7 @@ class I433_FM_Rx(gr.top_block):
         self.connect((self.blks2_wfm_rcv_0, 0), (self.blks2_rational_resampler_xxx_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.blks2_wfm_rcv_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.low_pass_filter_0, 0))    
+        self.connect((self.uhd_usrp_source_0, 0), (self.zeromq_push_sink_0_0_0, 0))    
 
     def get_freq(self):
         return self.freq

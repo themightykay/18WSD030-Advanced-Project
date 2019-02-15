@@ -152,7 +152,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>0.5</value>
+      <value>1</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -278,7 +278,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>433e6</value>
+      <value>434e6</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -467,7 +467,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>24000</value>
+      <value>16000</value>
     </param>
   </block>
   <block>

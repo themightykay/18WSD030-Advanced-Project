@@ -5,7 +5,7 @@
 # Title: Sniffing 433 LoRa packets
 # Author: KD - 11/2/19
 # Description: Sniffing 433 LoRa packets and sending IQ to host
-# Generated: Tue Jul 17 17:10:06 2007
+# Generated: Thu Jul 12 12:03:33 2007
 ##################################################
 
 from gnuradio import eng_notation
@@ -23,7 +23,7 @@ import time
 
 class I433_LoRa_scan(gr.top_block):
 
-    def __init__(self, bw=1*250e3+0*500e3, rx_gain=100, freq=923.3e6*0+433.750e6*0+919.750e6*0+434e6*1):
+    def __init__(self, bw=1*250e3+0*500e3, rx_gain=100, freq=434e6*1+868e6*0):
         gr.top_block.__init__(self, "Sniffing 433 LoRa packets")
 
         ##################################################
@@ -140,7 +140,7 @@ def argument_parser():
         "", "--rx-gain", dest="rx_gain", type="eng_float", default=eng_notation.num_to_str(100),
         help="Set rx_gain [default=%default]")
     parser.add_option(
-        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(923.3e6*0+433.750e6*0+919.750e6*0+434e6*1),
+        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(434e6*1+868e6*0),
         help="Set freq [default=%default]")
     return parser
 

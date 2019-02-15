@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Mon Feb 11 12:16:52 2019
+# Generated: Fri Feb 15 19:04:45 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -72,14 +72,14 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate = samp_rate = 44100
         self.rx_gain = rx_gain = 0
-        self.freq = freq = 433e6
+        self.freq = freq = 434e6
         self.bw = bw = 1e6
-        self.audio_gain = audio_gain = 0.5
+        self.audio_gain = audio_gain = 1
 
         ##################################################
         # Blocks
         ##################################################
-        self._freq_range = Range(70e6, 3000e6, 10e6, 433e6, 200)
+        self._freq_range = Range(70e6, 3000e6, 10e6, 434e6, 200)
         self._freq_win = RangeWidget(self._freq_range, self.set_freq, 'Frequency (Hz)', "slider", float)
         self.top_grid_layout.addWidget(self._freq_win, 0, 0, 1, 1)
         [self.top_grid_layout.setRowStretch(r,1) for r in range(0,1)]
@@ -89,7 +89,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         self.top_grid_layout.addWidget(self._bw_win, 2, 0, 1, 1)
         [self.top_grid_layout.setRowStretch(r,1) for r in range(2,3)]
         [self.top_grid_layout.setColumnStretch(c,1) for c in range(0,1)]
-        self._audio_gain_range = Range(0, 100, 1, 0.5, 0)
+        self._audio_gain_range = Range(0, 100, 1, 1, 0)
         self._audio_gain_win = RangeWidget(self._audio_gain_range, self.set_audio_gain, 'Audio Gain', "dial", float)
         self.top_grid_layout.addWidget(self._audio_gain_win, 2, 1, 1, 1)
         [self.top_grid_layout.setRowStretch(r,1) for r in range(2,3)]
@@ -151,7 +151,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         self.channel_1_stream_pull = zeromq.pull_source(gr.sizeof_gr_complex, 1, 'tcp://192.168.10.2:9999', 100, False, -1)
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((audio_gain, ))
-        self.audio_sink_0 = audio.sink(24000, '', True)
+        self.audio_sink_0 = audio.sink(16000, '', True)
 
         ##################################################
         # Connections
