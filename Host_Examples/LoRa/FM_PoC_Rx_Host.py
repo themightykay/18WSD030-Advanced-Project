@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Mon Feb 11 19:08:26 2019
+# Generated: Thu Feb 14 18:21:04 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -73,7 +73,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate = samp_rate = 1e6
         self.offset = offset = -250e3
-        self.freq = freq = 923.3e6*0+433.750e6*0+ 919.750e6*0+434e6*1
+        self.freq = freq = 434e6*1+868e6*0
         self.bw_fft = bw_fft = samp_rate
         self.bw = bw = 1*250e3+0*500e3
 
@@ -178,17 +178,17 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         	  flt_size=32)
         self.pfb_arb_resampler_xxx_0.declare_sample_delay(0)
 
-        self.lora_demod_0_0 = lora.demod(8, False, 25.0, 2)
-        self.lora_demod_0 = lora.demod(8, False, 25.0, 2)
+        self.lora_demod_0_0 = lora.demod(7, False, 25.0, 2)
+        self.lora_demod_0 = lora.demod(7, False, 25.0, 2)
         self.lora_decode_0_0_0 = lora.decode(7, 4, False, False)
-        self.lora_decode_0_0 = lora.decode(7,  5, False, False)
+        self.lora_decode_0_0 = lora.decode(7, 4, False, False)
         self.channel_2_stream_pull = zeromq.pull_source(gr.sizeof_gr_complex, 1, 'tcp://192.168.10.2:9995', 100, False, -1)
         self.channel_1_stream_pull = zeromq.pull_source(gr.sizeof_gr_complex, 1, 'tcp://192.168.10.2:9999', 100, False, -1)
         self._bw_fft_range = Range((samp_rate)/2, 2*samp_rate, 1, samp_rate, 200)
         self._bw_fft_win = RangeWidget(self._bw_fft_range, self.set_bw_fft, "bw_fft", "counter_slider", float)
         self.top_layout.addWidget(self._bw_fft_win)
-        self.blocks_socket_pdu_0_1 = blocks.socket_pdu("UDP_SERVER", '127.0.0.1', '52002', 10000, False)
-        self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_SERVER", '127.0.0.1', '52001', 10000, False)
+        self.blocks_socket_pdu_0_1 = blocks.socket_pdu("UDP_CLIENT", '127.0.0.1', '52002', 10000, False)
+        self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_CLIENT", '127.0.0.1', '52001', 10000, False)
         self.blocks_rotator_cc_0_0 = blocks.rotator_cc((2 * math.pi * offset) / samp_rate)
         self.blocks_rotator_cc_0 = blocks.rotator_cc((2 * math.pi * offset) / samp_rate)
         self.blocks_message_debug_0_0 = blocks.message_debug()
@@ -197,9 +197,9 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.lora_decode_0_0, 'out'), (self.blocks_message_debug_0_0, 'print_pdu'))
+        self.msg_connect((self.lora_decode_0_0, 'out'), (self.blocks_message_debug_0_0, 'print'))
         self.msg_connect((self.lora_decode_0_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))
-        self.msg_connect((self.lora_decode_0_0_0, 'out'), (self.blocks_message_debug_0, 'print_pdu'))
+        self.msg_connect((self.lora_decode_0_0_0, 'out'), (self.blocks_message_debug_0, 'print'))
         self.msg_connect((self.lora_decode_0_0_0, 'out'), (self.blocks_socket_pdu_0_1, 'pdus'))
         self.msg_connect((self.lora_demod_0, 'out'), (self.lora_decode_0_0, 'in'))
         self.msg_connect((self.lora_demod_0_0, 'out'), (self.lora_decode_0_0_0, 'in'))

@@ -195,7 +195,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>923.3e6*0+433.750e6*0+ 919.750e6*0+434e6*1</value>
+      <value>434e6*1+868e6*0</value>
     </param>
   </block>
   <block>
@@ -272,7 +272,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 344)</value>
+      <value>(1160, 408)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -303,7 +303,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 80)</value>
+      <value>(1144, 32)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -420,7 +420,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1160, 196)</value>
+      <value>(1152, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -456,7 +456,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>"UDP_SERVER"</value>
+      <value>"UDP_CLIENT"</value>
     </param>
   </block>
   <block>
@@ -479,7 +479,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1136, 500)</value>
+      <value>(1144, 612)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -515,7 +515,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>"UDP_SERVER"</value>
+      <value>"UDP_CLIENT"</value>
     </param>
   </block>
   <block>
@@ -683,7 +683,7 @@
     </param>
     <param>
       <key>code_rate</key>
-      <value> 5</value>
+      <value>4</value>
     </param>
     <param>
       <key>comment</key>
@@ -703,7 +703,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 188)</value>
+      <value>(920, 68)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -758,7 +758,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(912, 380)</value>
+      <value>(904, 444)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -813,7 +813,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 188)</value>
+      <value>(736, 68)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -837,7 +837,7 @@
     </param>
     <param>
       <key>spreading_factor</key>
-      <value>8</value>
+      <value>7</value>
     </param>
   </block>
   <block>
@@ -868,7 +868,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 380)</value>
+      <value>(720, 444)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -892,7 +892,7 @@
     </param>
     <param>
       <key>spreading_factor</key>
-      <value>8</value>
+      <value>7</value>
     </param>
   </block>
   <block>
@@ -1069,7 +1069,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 284)</value>
+      <value>(872, 284)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1659,7 +1659,7 @@
     <source_block_id>lora_decode_0_0</source_block_id>
     <sink_block_id>blocks_message_debug_0_0</sink_block_id>
     <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
+    <sink_key>print</sink_key>
   </connection>
   <connection>
     <source_block_id>lora_decode_0_0</source_block_id>
@@ -1671,7 +1671,7 @@
     <source_block_id>lora_decode_0_0_0</source_block_id>
     <sink_block_id>blocks_message_debug_0</sink_block_id>
     <source_key>out</source_key>
-    <sink_key>print_pdu</sink_key>
+    <sink_key>print</sink_key>
   </connection>
   <connection>
     <source_block_id>lora_decode_0_0_0</source_block_id>
