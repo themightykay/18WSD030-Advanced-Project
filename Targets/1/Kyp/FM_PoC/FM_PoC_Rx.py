@@ -5,7 +5,7 @@
 # Title: FM audio PoC RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 430MHz
-# Generated: Fri Jul 13 12:18:38 2007
+# Generated: Thu Jul 12 16:20:10 2007
 ##################################################
 
 from gnuradio import analog
@@ -82,22 +82,26 @@ class FM_PoC_Rx(gr.top_block):
         	quad_rate=samp_rate/lpf_decim,
         	audio_decimation=1,
         )
+        (self.blks2_wfm_rcv_0_0).set_max_output_buffer(1000000)
         self.blks2_wfm_rcv_0 = analog.wfm_rcv(
         	quad_rate=samp_rate/lpf_decim,
         	audio_decimation=1,
         )
+        (self.blks2_wfm_rcv_0).set_max_output_buffer(1000000)
         self.blks2_rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
-                interpolation=441,
-                decimation=1250,
+                interpolation=882,
+                decimation=2500,
                 taps=None,
                 fractional_bw=None,
         )
+        (self.blks2_rational_resampler_xxx_0_0).set_max_output_buffer(1000000)
         self.blks2_rational_resampler_xxx_0 = filter.rational_resampler_fff(
-                interpolation=441,
-                decimation=1250,
+                interpolation=882,
+                decimation=2500,
                 taps=None,
                 fractional_bw=None,
         )
+        (self.blks2_rational_resampler_xxx_0).set_max_output_buffer(1000000)
 
         ##################################################
         # Connections
@@ -148,9 +152,9 @@ class FM_PoC_Rx(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
 
     def get_lpf_decim(self):
         return self.lpf_decim

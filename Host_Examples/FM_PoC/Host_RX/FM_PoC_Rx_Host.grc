@@ -467,7 +467,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>16000</value>
+      <value>44100</value>
     </param>
   </block>
   <block>
