@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: Open day demo
 # Author: KD - 19/2/19
-# Generated: Tue Feb 19 19:16:33 2019
+# Generated: Wed Feb 20 13:52:09 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -26,9 +26,11 @@ from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
+from gnuradio import fosphor
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
+from gnuradio.fft import window
 from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
@@ -140,6 +142,9 @@ class Open_day_demo_Host(gr.top_block, Qt.QWidget):
         self.top_grid_layout.addWidget(self._qtgui_freq_sink_x_0_win, 1, 0, 1, 1)
         [self.top_grid_layout.setRowStretch(r,1) for r in range(1,2)]
         [self.top_grid_layout.setColumnStretch(c,1) for c in range(0,1)]
+        self.fosphor_glfw_sink_c_0 = fosphor.glfw_sink_c()
+        self.fosphor_glfw_sink_c_0.set_fft_window(window.WIN_BLACKMAN_hARRIS)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(0, samp_rate)
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_file_source_0_0_1 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Open Day Demo/Line of Sight/SIMO/433_FM_ch2', True)
@@ -165,6 +170,7 @@ class Open_day_demo_Host(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_file_source_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.blocks_file_source_0_0, 0), (self.analog_wfm_rcv_0, 0))
         self.connect((self.blocks_file_source_0_0_0, 0), (self.qtgui_freq_sink_x_0, 1))
+        self.connect((self.blocks_file_source_0_0_1, 0), (self.fosphor_glfw_sink_c_0, 0))
         self.connect((self.blocks_file_source_0_0_1, 0), (self.qtgui_freq_sink_x_0, 2))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.audio_sink_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.audio_sink_0, 1))
@@ -182,6 +188,7 @@ class Open_day_demo_Host(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq, self.samp_rate)
+        self.fosphor_glfw_sink_c_0.set_frequency_range(0, self.samp_rate)
 
     def get_freq(self):
         return self.freq

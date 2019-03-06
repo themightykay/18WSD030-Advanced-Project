@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Tue Feb 19 19:10:29 2019
+# Generated: Tue Mar  5 16:38:54 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -32,6 +32,7 @@ from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
+import pmt
 import sip
 import sys
 from gnuradio import qtgui
@@ -61,11 +62,8 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         self.top_layout.addLayout(self.top_grid_layout)
 
         self.settings = Qt.QSettings("GNU Radio", "FM_PoC_Rx_Host")
+        self.restoreGeometry(self.settings.value("geometry", type=QtCore.QByteArray))
 
-        if StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
-            self.restoreGeometry(self.settings.value("geometry").toByteArray())
-        else:
-            self.restoreGeometry(self.settings.value("geometry", type=QtCore.QByteArray))
 
         ##################################################
         # Variables
@@ -81,8 +79,10 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         self._audio_gain_range = Range(0, 10, 0.01, 0.5, 0)
         self._audio_gain_win = RangeWidget(self._audio_gain_range, self.set_audio_gain, 'Audio Gain', "dial", float)
         self.top_grid_layout.addWidget(self._audio_gain_win, 0, 0, 1, 1)
-        [self.top_grid_layout.setRowStretch(r,1) for r in range(0,1)]
-        [self.top_grid_layout.setColumnStretch(c,1) for c in range(0,1)]
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
                 interpolation=48,
                 decimation=250,
@@ -138,12 +138,16 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
 
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_freq_sink_x_0_win, 1, 0, 1, 1)
-        [self.top_grid_layout.setRowStretch(r,1) for r in range(1,2)]
-        [self.top_grid_layout.setColumnStretch(c,1) for c in range(0,1)]
+        for r in range(1, 2):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch1', True)
+        self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch2', True)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.audio_sink_0 = audio.sink(24000, '', True)
         self.analog_wfm_rcv_0_0 = analog.wfm_rcv(
         	quad_rate=250000,
@@ -153,6 +157,8 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         	quad_rate=250000,
         	audio_decimation=1,
         )
+
+
 
         ##################################################
         # Connections
@@ -203,9 +209,6 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
 
 def main(top_block_cls=FM_PoC_Rx_Host, options=None):
 
-    if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
-        style = gr.prefs().get_string('qtgui', 'style', 'raster')
-        Qt.QApplication.setGraphicsSystem(style)
     qapp = Qt.QApplication(sys.argv)
 
     tb = top_block_cls()
