@@ -5,7 +5,7 @@
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
 # Description: FM audio file Rx at 433 MHz
-# Generated: Thu Jul 19 14:24:51 2007
+# Generated: Thu Jul 19 19:24:11 2007
 ##################################################
 
 from gnuradio import blocks
@@ -27,7 +27,7 @@ class I433_FM_Rx(gr.top_block):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 1e6
-        self.rx_gain = rx_gain = 100
+        self.rx_gain = rx_gain = 0
         self.freq = freq = 434e6
 
         ##################################################

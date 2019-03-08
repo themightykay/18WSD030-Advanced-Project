@@ -38,7 +38,7 @@
     </param>
     <param>
       <key>generate_options</key>
-      <value>qt_gui</value>
+      <value>wx_gui</value>
     </param>
     <param>
       <key>hier_block_src_path</key>
@@ -113,7 +113,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>250e3</value>
+      <value>500e3</value>
     </param>
   </block>
   <block>
@@ -140,7 +140,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>5</value>
+      <value>4</value>
     </param>
   </block>
   <block>
@@ -275,7 +275,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>-250e3</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -302,7 +302,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1e6</value>
+      <value>250e3</value>
     </param>
   </block>
   <block>
@@ -329,7 +329,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>7</value>
+      <value>8</value>
     </param>
   </block>
   <block>
@@ -514,6 +514,61 @@
     <param>
       <key>type</key>
       <value>"UDP_SERVER"</value>
+    </param>
+  </block>
+  <block>
+    <key>fosphor_wx_sink_c</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>freq_center</key>
+      <value>freq</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(968, 500)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>grid_pos</key>
+      <value></value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>fosphor_wx_sink_c_0</value>
+    </param>
+    <param>
+      <key>notebook</key>
+      <value></value>
+    </param>
+    <param>
+      <key>freq_span</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>win_size</key>
+      <value></value>
+    </param>
+    <param>
+      <key>wintype</key>
+      <value>window.WIN_BLACKMAN_hARRIS</value>
     </param>
   </block>
   <block>
@@ -776,6 +831,12 @@
   <connection>
     <source_block_id>pfb_arb_resampler_xxx_0</source_block_id>
     <sink_block_id>blocks_file_sink_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>pfb_arb_resampler_xxx_0</source_block_id>
+    <sink_block_id>fosphor_wx_sink_c_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

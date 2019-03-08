@@ -5,10 +5,9 @@
 # Title: Transmitting 434 LoRa packets
 # Author: KD - 23/2/19
 # Description: Transmitting 434 LoRa packets - string inputed at UDP socket
-# Generated: Mon Mar  4 16:27:17 2019
+# Generated: Fri Mar  8 19:06:49 2019
 ##################################################
 
-from distutils.version import StrictVersion
 
 if __name__ == '__main__':
     import ctypes
@@ -20,58 +19,39 @@ if __name__ == '__main__':
         except:
             print "Warning: failed to XInitThreads()"
 
-from PyQt5 import Qt, QtCore
 from gnuradio import blocks
 from gnuradio import eng_notation
+from gnuradio import fosphor
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
+from gnuradio.fft import window
 from gnuradio.filter import firdes
 from gnuradio.filter import pfb
+from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import lora
 import math
-import sys
-from gnuradio import qtgui
+import wx
 
 
-class I433_LoRa_Tx(gr.top_block, Qt.QWidget):
+class I433_LoRa_Tx(grc_wxgui.top_block_gui):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Transmitting 434 LoRa packets")
-        Qt.QWidget.__init__(self)
-        self.setWindowTitle("Transmitting 434 LoRa packets")
-        qtgui.util.check_set_qss()
-        try:
-            self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
-        except:
-            pass
-        self.top_scroll_layout = Qt.QVBoxLayout()
-        self.setLayout(self.top_scroll_layout)
-        self.top_scroll = Qt.QScrollArea()
-        self.top_scroll.setFrameStyle(Qt.QFrame.NoFrame)
-        self.top_scroll_layout.addWidget(self.top_scroll)
-        self.top_scroll.setWidgetResizable(True)
-        self.top_widget = Qt.QWidget()
-        self.top_scroll.setWidget(self.top_widget)
-        self.top_layout = Qt.QVBoxLayout(self.top_widget)
-        self.top_grid_layout = Qt.QGridLayout()
-        self.top_layout.addLayout(self.top_grid_layout)
-
-        self.settings = Qt.QSettings("GNU Radio", "I433_LoRa_Tx")
-        self.restoreGeometry(self.settings.value("geometry", type=QtCore.QByteArray))
-
+        grc_wxgui.top_block_gui.__init__(self, title="Transmitting 434 LoRa packets")
+        _icon_path = "/usr/share/icons/hicolor/32x32/apps/gnuradio-grc.png"
+        self.SetIcon(wx.Icon(_icon_path, wx.BITMAP_TYPE_ANY))
 
         ##################################################
         # Variables
         ##################################################
-        self.spreading_factor = spreading_factor = 7
-        self.samp_rate = samp_rate = 1e6
+        self.spreading_factor = spreading_factor = 8
+        self.samp_rate = samp_rate = 250e3
         self.offset = offset = -250e3
         self.ldr = ldr = True
         self.header = header = False
         self.gain = gain = 10
         self.freq = freq = 434e3
-        self.code_rate = code_rate = 5
+        self.code_rate = code_rate = 4
         self.bw = bw = 250e3
 
         ##################################################
@@ -85,6 +65,12 @@ class I433_LoRa_Tx(gr.top_block, Qt.QWidget):
 
         self.lora_mod_0 = lora.mod(spreading_factor, 0x12)
         self.lora_encode_0 = lora.encode(spreading_factor, code_rate, ldr, header)
+        self.fosphor_wx_sink_c_0 = fosphor.wx_sink_c(
+        	self.GetWin()
+        )
+        self.fosphor_wx_sink_c_0.set_fft_window(window.WIN_BLACKMAN_hARRIS)
+        self.fosphor_wx_sink_c_0.set_frequency_range(freq, samp_rate)
+        self.Add(self.fosphor_wx_sink_c_0.win)
         self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_SERVER", '127.0.0.1', '52001', 10000, False)
         self.blocks_rotator_cc_0 = blocks.rotator_cc((2 * math.pi * offset) / samp_rate)
         self.blocks_message_debug_0 = blocks.message_debug()
@@ -102,11 +88,7 @@ class I433_LoRa_Tx(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_rotator_cc_0, 0), (self.pfb_arb_resampler_xxx_0, 0))
         self.connect((self.lora_mod_0, 0), (self.blocks_rotator_cc_0, 0))
         self.connect((self.pfb_arb_resampler_xxx_0, 0), (self.blocks_file_sink_0, 0))
-
-    def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "I433_LoRa_Tx")
-        self.settings.setValue("geometry", self.saveGeometry())
-        event.accept()
+        self.connect((self.pfb_arb_resampler_xxx_0, 0), (self.fosphor_wx_sink_c_0, 0))
 
     def get_spreading_factor(self):
         return self.spreading_factor
@@ -120,6 +102,7 @@ class I433_LoRa_Tx(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.pfb_arb_resampler_xxx_0.set_rate(self.samp_rate/self.bw)
+        self.fosphor_wx_sink_c_0.set_frequency_range(self.freq, self.samp_rate)
         self.blocks_rotator_cc_0.set_phase_inc((2 * math.pi * self.offset) / self.samp_rate)
 
     def get_offset(self):
@@ -152,6 +135,7 @@ class I433_LoRa_Tx(gr.top_block, Qt.QWidget):
 
     def set_freq(self, freq):
         self.freq = freq
+        self.fosphor_wx_sink_c_0.set_frequency_range(self.freq, self.samp_rate)
 
     def get_code_rate(self):
         return self.code_rate
@@ -169,17 +153,9 @@ class I433_LoRa_Tx(gr.top_block, Qt.QWidget):
 
 def main(top_block_cls=I433_LoRa_Tx, options=None):
 
-    qapp = Qt.QApplication(sys.argv)
-
     tb = top_block_cls()
-    tb.start()
-    tb.show()
-
-    def quitting():
-        tb.stop()
-        tb.wait()
-    qapp.aboutToQuit.connect(quitting)
-    qapp.exec_()
+    tb.Start(True)
+    tb.Wait()
 
 
 if __name__ == '__main__':
