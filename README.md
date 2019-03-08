@@ -13,7 +13,11 @@ This project will investigate the effectiveness of multiple antennas on wireless
  To measure the effectiveness of using multiple antennas on sensor nodes close to, and upon water using software defined radios.   
  
  *Current Progress*
-
 - CW Rx Target and Host
 - FM audio Tx Target (SISO)
 - FM audio Rx Target and Host (SISO - still missing SIMO implementation)
+- FM audio Rx Target and Host SIMO
+- LoRa Rx on Target and Host with fosphor (waterfall)
+- LoRa Tx on Target using Host generated IQ
+- Arduino code for LoRa32 v2 Tx and RX
+
