@@ -20,4 +20,5 @@ This project will investigate the effectiveness of multiple antennas on wireless
 - LoRa Rx on Target and Host with fosphor (waterfall)
 - LoRa Tx on Target using Host generated IQ
 - Arduino code for LoRa32 v2 Tx and RX
+- Created three antenna mounts to test spatial diversity 
 
