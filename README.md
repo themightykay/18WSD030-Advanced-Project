@@ -22,7 +22,4 @@ This project will investigate the effectiveness of multiple antennas on wireless
 - Arduino code for LoRa32 v2 Tx and RX
 - Created three antenna mounts to test spatial diversity
 - LoRa Tx and Rx now works for targets and host - decoding not always succesful 
-<<<<<<< HEAD
 
-=======
->>>>>>> 56ac03107cf5dfe0d98fd242781a5cf5583c6c7f
