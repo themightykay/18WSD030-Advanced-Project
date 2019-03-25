@@ -10,7 +10,7 @@ This project will investigate the effectiveness of multiple antennas on wireless
 
 **Project Aim** 
 
- To measure the effectiveness of using multiple antennas on sensor nodes close to, and upon water using software defined radios.   
+ To measure the effectiveness of using multiple antennas on sensor nodes close to, and upon water using software defined radios.
  
  *Current Progress*
 - CW Rx Target and Host
@@ -22,4 +22,7 @@ This project will investigate the effectiveness of multiple antennas on wireless
 - Arduino code for LoRa32 v2 Tx and RX
 - Created three antenna mounts to test spatial diversity
 - LoRa Tx and Rx now works for targets and host - decoding not always succesful 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56ac03107cf5dfe0d98fd242781a5cf5583c6c7f
