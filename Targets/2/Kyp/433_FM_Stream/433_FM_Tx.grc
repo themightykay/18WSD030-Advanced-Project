@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.9'?>
+<?grc format='1' created='3.7.13'?>
 <flow_graph>
   <timestamp>Thu Dec  6 18:21:26 2018</timestamp>
   <block>
@@ -73,12 +73,20 @@
       <value>True</value>
     </param>
     <param>
+      <key>sizing_mode</key>
+      <value>fixed</value>
+    </param>
+    <param>
       <key>thread_safe_setters</key>
       <value></value>
     </param>
     <param>
       <key>title</key>
       <value>433 FM audio Tx to host</value>
+    </param>
+    <param>
+      <key>placement</key>
+      <value>(0,0)</value>
     </param>
   </block>
   <block>
@@ -93,7 +101,61 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(104, 124)</value>
+      <value>(8, 276)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>audio_interp</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>4</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(112, 276)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>audio_rate</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>48e3</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(112, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -120,7 +182,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 124)</value>
+      <value>(8, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -133,60 +195,6 @@
     <param>
       <key>value</key>
       <value>250e3</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 284)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>server_address</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>"192.168.9.2"</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 348)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>server_port</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>30000</value>
     </param>
   </block>
   <block>
@@ -213,7 +221,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(288, 316)</value>
+      <value>(304, 332)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -236,63 +244,16 @@
       <value>0</value>
     </param>
     <param>
+      <key>fh</key>
+      <value>-1.0</value>
+    </param>
+    <param>
       <key>quad_rate</key>
       <value>250000</value>
     </param>
     <param>
       <key>tau</key>
       <value>75e-6</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_multiply_const_vxx</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>const</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(432, 180)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_multiply_const_vxx_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
     </param>
   </block>
   <block>
@@ -319,7 +280,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 172)</value>
+      <value>(304, 196)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -381,6 +342,10 @@
       <value></value>
     </param>
     <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
       <key>type</key>
       <value>eng_float</value>
     </param>
@@ -425,7 +390,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(544, 300)</value>
+      <value>(544, 316)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -480,7 +445,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>441</value>
+      <value>44100</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -492,7 +457,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(592, 167)</value>
+      <value>(520, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -504,7 +469,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>625</value>
+      <value>62500</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -539,7 +504,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(104, 190)</value>
+      <value>(112, 196)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -556,6 +521,10 @@
     <param>
       <key>short_id</key>
       <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
@@ -1238,7 +1207,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(744, 320)</value>
+      <value>(712, 324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1365,6 +1334,10 @@
       <value>True</value>
     </param>
     <param>
+      <key>hide_lo_controls</key>
+      <value>True</value>
+    </param>
+    <param>
       <key>stream_args</key>
       <value></value>
     </param>
@@ -1385,41 +1358,6 @@
       <value></value>
     </param>
   </block>
-  <block>
-    <key>xmlrpc_server</key>
-    <param>
-      <key>addr</key>
-      <value>server_address</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 412)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>xmlrpc_server_0</value>
-    </param>
-    <param>
-      <key>port</key>
-      <value>server_port</value>
-    </param>
-  </block>
   <connection>
     <source_block_id>analog_wfm_tx_0</source_block_id>
     <sink_block_id>low_pass_filter_0</sink_block_id>
@@ -1427,14 +1365,8 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
-    <sink_block_id>rational_resampler_xxx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_wavfile_source_0</source_block_id>
-    <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
+    <sink_block_id>rational_resampler_xxx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

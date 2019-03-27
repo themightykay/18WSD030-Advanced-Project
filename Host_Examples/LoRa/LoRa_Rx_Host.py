@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: LoRa Rx host
 # Author: KD - 1/3/19
-# Generated: Fri Mar  8 19:33:25 2019
+# Generated: Wed Mar 27 17:00:09 2019
 ##################################################
 
 
@@ -44,15 +44,15 @@ class LoRa_Rx_Host(grc_wxgui.top_block_gui):
         ##################################################
         # Variables
         ##################################################
-        self.spreading_factor = spreading_factor = 7
+        self.spreading_factor = spreading_factor = 8
         self.samp_rate = samp_rate = 1000000
         self.offset = offset = 0
         self.ldr = ldr = False
         self.header = header = False
         self.freq = freq = 434e6
-        self.code_rate = code_rate = 4
+        self.code_rate = code_rate = 5
         self.bw_fft = bw_fft = 1e6
-        self.bw = bw = 250e3
+        self.bw = bw = 500e3
 
         ##################################################
         # Blocks
@@ -79,7 +79,7 @@ class LoRa_Rx_Host(grc_wxgui.top_block_gui):
         self.fosphor_wx_sink_c_0.set_fft_window(window.WIN_BLACKMAN_hARRIS)
         self.fosphor_wx_sink_c_0.set_frequency_range(freq, samp_rate)
         self.Add(self.fosphor_wx_sink_c_0.win)
-        self.blocks_throttle_0_0_0 = blocks.throttle(gr.sizeof_gr_complex*1, 100e3,True)
+        self.blocks_throttle_0_0_0 = blocks.throttle(gr.sizeof_gr_complex*1, 250e3,True)
         self.blocks_socket_pdu_0_0 = blocks.socket_pdu("UDP_CLIENT", '127.0.0.1', '52003', 10000, False)
         self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_CLIENT", '127.0.0.1', '52002', 10000, False)
         self.blocks_rotator_cc_0_0_0 = blocks.rotator_cc((2 * math.pi * offset) / samp_rate)
@@ -88,7 +88,7 @@ class LoRa_Rx_Host(grc_wxgui.top_block_gui):
         self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_LoRa_ch1', True)
         self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/nice LoRa example/433_LoRa_ch2', True)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_LoRa_ch1', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
 
 

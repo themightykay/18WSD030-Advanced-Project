@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Tue Mar  5 16:38:54 2019
+# Generated: Wed Mar 27 19:27:40 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -27,12 +27,12 @@ from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
 from gnuradio import gr
+from gnuradio import gr, blocks
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
-import pmt
 import sip
 import sys
 from gnuradio import qtgui
@@ -68,9 +68,10 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 1000000
+        self.samp_rate = samp_rate = 250000
         self.freq = freq = 434e6
-        self.bw = bw = 1e6
+        self.audio_samp_rate = audio_samp_rate = 48000
+        self.audio_interp = audio_interp = 4
         self.audio_gain = audio_gain = 0.5
 
         ##################################################
@@ -84,14 +85,14 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=250,
+                interpolation=audio_samp_rate,
+                decimation=samp_rate,
                 taps=None,
                 fractional_bw=None,
         )
         self.rational_resampler_xxx_0 = filter.rational_resampler_fff(
-                interpolation=48,
-                decimation=250,
+                interpolation=audio_samp_rate,
+                decimation=samp_rate,
                 taps=None,
                 fractional_bw=None,
         )
@@ -99,7 +100,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         	1024, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
         	freq, #fc
-        	20e3, #bw
+        	200e3, #bw
         	"", #name
         	2 #number of inputs
         )
@@ -144,17 +145,15 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((audio_gain, ))
-        self.blocks_file_source_0_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch1', True)
-        self.blocks_file_source_0_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, '/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch2', True)
-        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
+        self.blocks_file_meta_source_0_0 = blocks.file_meta_source('/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch2', True, False, '')
+        self.blocks_file_meta_source_0 = blocks.file_meta_source('/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch1', True, False, '')
         self.audio_sink_0 = audio.sink(24000, '', True)
         self.analog_wfm_rcv_0_0 = analog.wfm_rcv(
-        	quad_rate=250000,
+        	quad_rate=samp_rate,
         	audio_decimation=1,
         )
         self.analog_wfm_rcv_0 = analog.wfm_rcv(
-        	quad_rate=250000,
+        	quad_rate=samp_rate,
         	audio_decimation=1,
         )
 
@@ -165,10 +164,10 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         self.connect((self.analog_wfm_rcv_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.analog_wfm_rcv_0_0, 0), (self.rational_resampler_xxx_0_0, 0))
-        self.connect((self.blocks_file_source_0, 0), (self.analog_wfm_rcv_0_0, 0))
-        self.connect((self.blocks_file_source_0, 0), (self.qtgui_freq_sink_x_0, 1))
-        self.connect((self.blocks_file_source_0_0, 0), (self.analog_wfm_rcv_0, 0))
-        self.connect((self.blocks_file_source_0_0, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.connect((self.blocks_file_meta_source_0, 0), (self.analog_wfm_rcv_0, 0))
+        self.connect((self.blocks_file_meta_source_0, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.connect((self.blocks_file_meta_source_0_0, 0), (self.analog_wfm_rcv_0_0, 0))
+        self.connect((self.blocks_file_meta_source_0_0, 0), (self.qtgui_freq_sink_x_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.audio_sink_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.audio_sink_0, 1))
         self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))
@@ -190,13 +189,19 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
 
     def set_freq(self, freq):
         self.freq = freq
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq, 20e3)
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq, 200e3)
 
-    def get_bw(self):
-        return self.bw
+    def get_audio_samp_rate(self):
+        return self.audio_samp_rate
 
-    def set_bw(self, bw):
-        self.bw = bw
+    def set_audio_samp_rate(self, audio_samp_rate):
+        self.audio_samp_rate = audio_samp_rate
+
+    def get_audio_interp(self):
+        return self.audio_interp
+
+    def set_audio_interp(self, audio_interp):
+        self.audio_interp = audio_interp
 
     def get_audio_gain(self):
         return self.audio_gain
