@@ -4,20 +4,18 @@
 # GNU Radio Python Flow Graph
 # Title: FM audio 433 RX
 # Author: KD - 6/12/18
-# Description: FM audio file Rx at 433 MHz
-# Generated: Fri Jul 13 17:34:16 2007
+# Description: FM audio file Rx at 434 MHz
+# Generated: Thu Jul 19 21:10:27 2007
 ##################################################
 
-from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
 from gnuradio import gr
+from gnuradio import gr, blocks
 from gnuradio import uhd
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
-import SimpleXMLRPCServer
-import threading
 import time
 
 
@@ -37,18 +35,13 @@ class I433_FM_Rx(gr.top_block):
         ##################################################
         self.server_port = server_port = 30000
         self.server_address = server_address = "192.168.10.2"
-        self.samp_rate = samp_rate = 1e6
-        self.lpf_decim = lpf_decim = 4
+        self.samp_rate = samp_rate = 500e3
+        self.lpf_decim = lpf_decim = 2
         self.audio_samp_rate = audio_samp_rate = 44.1e3
 
         ##################################################
         # Blocks
         ##################################################
-        self.xmlrpc_server_0 = SimpleXMLRPCServer.SimpleXMLRPCServer((str(server_address), int(server_port)), allow_none=True)
-        self.xmlrpc_server_0.register_instance(self)
-        self.xmlrpc_server_0_thread = threading.Thread(target=self.xmlrpc_server_0.serve_forever)
-        self.xmlrpc_server_0_thread.daemon = True
-        self.xmlrpc_server_0_thread.start()
         self.uhd_usrp_source_0 = uhd.usrp_source(
         	",".join(("", "")),
         	uhd.stream_args(
@@ -60,11 +53,11 @@ class I433_FM_Rx(gr.top_block):
         self.uhd_usrp_source_0.set_samp_rate(samp_rate)
         self.uhd_usrp_source_0.set_center_freq(freq, 0)
         self.uhd_usrp_source_0.set_gain(rx_gain, 0)
-        self.uhd_usrp_source_0.set_antenna("RX2", 0)
+        self.uhd_usrp_source_0.set_antenna("TX/RX", 0)
         self.uhd_usrp_source_0.set_bandwidth(200e3, 0)
         self.uhd_usrp_source_0.set_center_freq(freq, 1)
         self.uhd_usrp_source_0.set_gain(rx_gain, 1)
-        self.uhd_usrp_source_0.set_antenna("RX2", 1)
+        self.uhd_usrp_source_0.set_antenna("TX/RX", 1)
         self.uhd_usrp_source_0.set_bandwidth(200e3, 1)
         (self.uhd_usrp_source_0).set_max_output_buffer(1000000)
         self.low_pass_filter_0_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
@@ -73,16 +66,16 @@ class I433_FM_Rx(gr.top_block):
         self.low_pass_filter_0 = filter.fir_filter_ccf(lpf_decim, firdes.low_pass(
         	1, samp_rate, 7e3, 7e3, firdes.WIN_HAMMING, 6.76))
         (self.low_pass_filter_0).set_max_output_buffer(1000000)
-        self.blocks_file_sink_1_0 = blocks.file_sink(gr.sizeof_gr_complex*1, "/home/root/grc_programs/Kyp/data/433_FM_ch2", False)
-        self.blocks_file_sink_1_0.set_unbuffered(False)
-        self.blocks_file_sink_1 = blocks.file_sink(gr.sizeof_gr_complex*1, "/home/root/grc_programs/Kyp/data/433_FM_ch1", False)
-        self.blocks_file_sink_1.set_unbuffered(False)
+        self.blocks_file_meta_sink_0_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "/home/root/grc_programs/Kyp/data/433_FM_ch1", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", False)
+        self.blocks_file_meta_sink_0_0.set_unbuffered(False)
+        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "/home/root/grc_programs/Kyp/data/433_FM_nouse", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", False)
+        self.blocks_file_meta_sink_0.set_unbuffered(False)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.low_pass_filter_0, 0), (self.blocks_file_sink_1, 0))    
-        self.connect((self.low_pass_filter_0_0, 0), (self.blocks_file_sink_1_0, 0))    
+        self.connect((self.low_pass_filter_0, 0), (self.blocks_file_meta_sink_0_0, 0))    
+        self.connect((self.low_pass_filter_0_0, 0), (self.blocks_file_meta_sink_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.low_pass_filter_0, 0))    
         self.connect((self.uhd_usrp_source_0, 1), (self.low_pass_filter_0_0, 0))    
 
