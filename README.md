@@ -12,8 +12,10 @@ This project will investigate the effectiveness of multiple antennas on wireless
 
  To measure the effectiveness of using multiple antennas on sensor nodes close to, and upon water using software defined radios.
  
- *Project Progress*
-1. Carrier Wave detection Rx Target with Host interface
+**Project Progress**
+
+Set up test
+ 1. Carrier Wave detection Rx Target with Host interface
 
 FM SISO 
  1. FM audio Tx Target (SISO)
