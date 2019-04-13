@@ -38,9 +38,9 @@ Experimental setup
 
 The majority of the code developed for this project was done in GNU Radio companion and python. To use the above code, you will need to install GNU Radio it the Ettus USRP dependancies. 
 
-GNU Radio is a free and open-source software development toolkit that provides signal processing blocks to implement software radios. GNU Radio can be installed by following the instructions here (https://wiki.gnuradio.org/index.php/InstallingGR). 
+GNU Radio is a free and open-source software development toolkit that provides signal processing blocks to implement software radios. GNU Radio can be installed by following the instructions here [https://wiki.gnuradio.org/index.php/InstallingGR]. 
 
-If you are looking to implement the code using hardware (SDRs), you will have to install the appropriate libraries. The above code was developed to be used on the Ettus E310 USRP using the UHD library from Ettus (https://files.ettus.com/manual/page_build_guide.html). 
+If you are looking to implement the code using hardware (SDRs), you will have to install the appropriate libraries. The above code was developed to be used on the Ettus E310 USRP using the UHD library from Ettus [https://files.ettus.com/manual/page_build_guide.html]. 
 
 After installing the required dependencies (explained above), you can download or clone the repository to your host machine. The file structure is simple. Code for Targets (SDRs) can be found in the /Targets folder. Please note that in my case the Target/1 is my *Rx* and Target/2 is my *Tx*. The differences between the two folders should be minimal. 
 
