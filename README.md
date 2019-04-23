@@ -1,3 +1,5 @@
+![lu-logo-transparent-2](https://user-images.githubusercontent.com/26578616/56578738-41993380-65c6-11e9-897b-044ce963e21a.png)
+
 # 18WSD030-Advanced-Project
 
 Repository for my MEng Advanced Project.
