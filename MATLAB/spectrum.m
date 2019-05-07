@@ -1,5 +1,22 @@
+%    Spectrum MATLAB function creates the power spectrum of a complex (IQ) signal.
+%
+%    Copyright (C) 2018  K. Diamantides
+%
+%    This program is free software: you can redistribute it and/or modify
+%    it under the terms of the GNU Affero General Public License as published
+%    by the Free Software Foundation, either version 3 of the License, or
+%    (at your option) any later version.
+%
+%    This program is distributed in the hope that it will be useful,
+%    but WITHOUT ANY WARRANTY; without even the implied warranty of
+%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%    GNU Affero General Public License for more details.
+%
+%    You should have received a copy of the GNU Affero General Public License
+%    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 function [frequency,power] = spectrum(complex_signal,f_carrier,bandwidth,disp,figure_title)
-%Spectrum function creates the spectrum of a complex signal
+%Spectrum function creates the power spectrum of a complex signal
 %   The spectrum function take as input a complex signal a frequency and a 
 %   bandwith. With these inputs it creates a new frequency base (x-axis)
 %   and a spectrum of the input signal (y-axis)
