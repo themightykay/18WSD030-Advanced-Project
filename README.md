@@ -41,6 +41,12 @@ MATLAB code
 2. SC,EGC,MRC - functions that perform Selection Combining, Maximal Ratio Combining and Equal Gain Combining to input signals 
 3. Read and write complex binary files - this is to read from GNU Radio file sinks - code was taken from gr-utils
 
+**Project Outcome**
+
+Based on the results obtained the optimal arrangment for a 2-branch SIMO system is an antenna separion of a full wavelength (434MHz=>70 cm) with no antenna polirisation. MRC seems to be the best combining technique with EGC being the second best and SC the worst.
+
+The effects of spatial diversity were very clear through out the set of measurments but the effects of polarisation diversity were inclusive. 
+
 **Usage instructions**
 
 The majority of the code developed for this project was done in GNU Radio companion and python. To use the above code, you will need to install GNU Radio it the Ettus USRP dependancies. 
