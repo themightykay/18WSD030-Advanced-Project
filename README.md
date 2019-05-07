@@ -65,9 +65,9 @@ I am not sure if I will keep maintaining this after the end of the project but i
 
 **License**
 
-All code developed and shared above is developed by me Kyprianos Diamantides (unless stated otherwise above).
+All code developed and shared above is developed by me, Kyprianos Diamantides (unless stated otherwise above).
 
-Copyright (C) <2018>  <K. Diamantides>
+Copyright (C) 2018  K. Diamantides
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
