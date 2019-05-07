@@ -1,6 +1,6 @@
 %    SC MATLAB function combines two signals using Equal Gain Combining divesity technique, this is done by selecting the one
 %with the best SNR.
-%    Copyright (C) 2018  K. Dimantides
+%    Copyright (C) 2018  K. Diamantides
 %
 %    This program is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU Affero General Public License as published
