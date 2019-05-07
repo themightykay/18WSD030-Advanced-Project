@@ -62,3 +62,22 @@ The /Host_Examples folder includes all the code written for the host computer. H
 The /MATLAB folder includes the functions used to read, analyse and combine the IQ data obtained through the SDR. The functions are quite simple. They are fully document in the code. Please refer to that. Also note that the read and write_complex_binary functions were not developed by me. The come with a GNU Radio installation under gr-utils.
 
 I am not sure if I will keep maintaining this after the end of the project but if any alterations are made they will be indicated here. 
+
+**License**
+
+All code developed and shared above is developed by me Kyprianos Diamantides (unless stated otherwise above).
+
+Copyright (C) <2018>  <K. Diamantides>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
