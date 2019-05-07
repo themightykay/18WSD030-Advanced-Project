@@ -36,6 +36,11 @@ Experimental setup
 1. Created three antenna mounts to test spatial and polarisation diversity
 2. Data collected has also been included for completion
 
+MATLAB code
+1. Spectrum function that creates Power Density Dunction (PDF) to the input signal
+2. SC,EGC,MRC - functions that perform Selection Combining, Maximal Ratio Combining and Equal Gain Combining to input signals 
+3. Read and write complex binary files - this is to read from GNU Radio file sinks - code was taken from gr-utils
+
 **Usage instructions**
 
 The majority of the code developed for this project was done in GNU Radio companion and python. To use the above code, you will need to install GNU Radio it the Ettus USRP dependancies. 
@@ -46,6 +51,8 @@ If you are looking to implement the code using hardware (SDRs), you will have to
 
 After installing the required dependencies (explained above), you can download or clone the repository to your host machine. The file structure is simple. Code for Targets (SDRs) can be found in the /Targets folder. Please note that in my case the Target/1 is my *Rx* and Target/2 is my *Tx*. The differences between the two folders should be minimal. 
 
-The /Host_Examples folder includes all the code written for the host computer. Host code will usually involve some kind of GUI for either real-time viewing of the data coming in or for controlling the setup or both. The GUI applications can be demanding, so my recommendation is to either use a Rasberry Pi or any other mid to high range computer running a recent version of Ubuntu. Using VMs can usually complicate things but haven't tested it.   
+The /Host_Examples folder includes all the code written for the host computer. Host code will usually involve some kind of GUI for either real-time viewing of the data coming in or for controlling the setup or both. The GUI applications can be demanding, so my recommendation is to either use a Rasberry Pi or any other mid to high range computer running a recent version of Ubuntu. Using VMs can usually complicate things but haven't tested it. 
+
+The /MATLAB folder includes the functions used to read, analyse and combine the IQ data obtained through the SDR. The functions are quite simple. They are fully document in the code. Please refer to that. Also note that the read and write_complex_binary functions were not developed by me. The come with a GNU Radio installation under gr-utils.
 
 I am not sure if I will keep maintaining this after the end of the project but if any alterations are made they will be indicated here. 
