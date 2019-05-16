@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: FM PoC Rx host
 # Author: KD - 6/12/18
-# Generated: Wed Mar 27 19:27:40 2019
+# Generated: Thu May 16 12:53:24 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -79,10 +79,10 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         self._audio_gain_range = Range(0, 10, 0.01, 0.5, 0)
         self._audio_gain_win = RangeWidget(self._audio_gain_range, self.set_audio_gain, 'Audio Gain', "dial", float)
-        self.top_grid_layout.addWidget(self._audio_gain_win, 0, 0, 1, 1)
+        self.top_grid_layout.addWidget(self._audio_gain_win, 0, 1, 1, 1)
         for r in range(0, 1):
             self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
+        for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
                 interpolation=audio_samp_rate,
@@ -96,6 +96,53 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
+        self.qtgui_freq_sink_x_0_0 = qtgui.freq_sink_f(
+        	1024, #size
+        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	freq, #fc
+        	200e3, #bw
+        	"", #name
+        	2 #number of inputs
+        )
+        self.qtgui_freq_sink_x_0_0.set_update_time(0.10)
+        self.qtgui_freq_sink_x_0_0.set_y_axis(-160, -40)
+        self.qtgui_freq_sink_x_0_0.set_y_label('Gain', 'dB')
+        self.qtgui_freq_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
+        self.qtgui_freq_sink_x_0_0.enable_autoscale(False)
+        self.qtgui_freq_sink_x_0_0.enable_grid(True)
+        self.qtgui_freq_sink_x_0_0.set_fft_average(0.2)
+        self.qtgui_freq_sink_x_0_0.enable_axis_labels(True)
+        self.qtgui_freq_sink_x_0_0.enable_control_panel(False)
+
+        if not True:
+          self.qtgui_freq_sink_x_0_0.disable_legend()
+
+        if "float" == "float" or "float" == "msg_float":
+          self.qtgui_freq_sink_x_0_0.set_plot_pos_half(not True)
+
+        labels = ['Channel 1', 'Channel 2', '', '', '',
+                  '', '', '', '', '']
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "green", "black", "cyan",
+                  "magenta", "yellow", "dark red", "dark green", "dark blue"]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(2):
+            if len(labels[i]) == 0:
+                self.qtgui_freq_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_freq_sink_x_0_0.set_line_label(i, labels[i])
+            self.qtgui_freq_sink_x_0_0.set_line_width(i, widths[i])
+            self.qtgui_freq_sink_x_0_0.set_line_color(i, colors[i])
+            self.qtgui_freq_sink_x_0_0.set_line_alpha(i, alphas[i])
+
+        self._qtgui_freq_sink_x_0_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0_0.pyqwidget(), Qt.QWidget)
+        self.top_grid_layout.addWidget(self._qtgui_freq_sink_x_0_0_win, 1, 1, 1, 1)
+        for r in range(1, 2):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
         	1024, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -105,12 +152,12 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         	2 #number of inputs
         )
         self.qtgui_freq_sink_x_0.set_update_time(0.10)
-        self.qtgui_freq_sink_x_0.set_y_axis(-90, 20)
+        self.qtgui_freq_sink_x_0.set_y_axis(-160, -60)
         self.qtgui_freq_sink_x_0.set_y_label('Gain', 'dB')
         self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
-        self.qtgui_freq_sink_x_0.enable_autoscale(True)
+        self.qtgui_freq_sink_x_0.enable_autoscale(False)
         self.qtgui_freq_sink_x_0.enable_grid(True)
-        self.qtgui_freq_sink_x_0.set_fft_average(0.05)
+        self.qtgui_freq_sink_x_0.set_fft_average(0.2)
         self.qtgui_freq_sink_x_0.enable_axis_labels(True)
         self.qtgui_freq_sink_x_0.enable_control_panel(False)
 
@@ -120,7 +167,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         if "complex" == "float" or "complex" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
 
-        labels = ['', '', '', '', '',
+        labels = ['Channel 1', 'Channel 2', '', '', '',
                   '', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
@@ -145,8 +192,8 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setColumnStretch(c, 1)
         self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((audio_gain, ))
-        self.blocks_file_meta_source_0_0 = blocks.file_meta_source('/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch2', True, False, '')
-        self.blocks_file_meta_source_0 = blocks.file_meta_source('/home/kyp/Documents/18WSD030-Advanced-Project/Targets/1/Kyp/data/433_FM_ch1', True, False, '')
+        self.blocks_file_meta_source_0_0 = blocks.file_meta_source('/home/kyp/Documents/18WSD030-Advanced-Project/Kyp_measurements_backup/90_l2_50/433_FM_ch2', True, False, '')
+        self.blocks_file_meta_source_0 = blocks.file_meta_source('/home/kyp/Documents/18WSD030-Advanced-Project/Kyp_measurements_backup/90_l2_50/433_FM_ch1', True, False, '')
         self.audio_sink_0 = audio.sink(24000, '', True)
         self.analog_wfm_rcv_0_0 = analog.wfm_rcv(
         	quad_rate=samp_rate,
@@ -162,7 +209,9 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
+        self.connect((self.analog_wfm_rcv_0, 0), (self.qtgui_freq_sink_x_0_0, 0))
         self.connect((self.analog_wfm_rcv_0, 0), (self.rational_resampler_xxx_0, 0))
+        self.connect((self.analog_wfm_rcv_0_0, 0), (self.qtgui_freq_sink_x_0_0, 1))
         self.connect((self.analog_wfm_rcv_0_0, 0), (self.rational_resampler_xxx_0_0, 0))
         self.connect((self.blocks_file_meta_source_0, 0), (self.analog_wfm_rcv_0, 0))
         self.connect((self.blocks_file_meta_source_0, 0), (self.qtgui_freq_sink_x_0, 0))
@@ -189,6 +238,7 @@ class FM_PoC_Rx_Host(gr.top_block, Qt.QWidget):
 
     def set_freq(self, freq):
         self.freq = freq
+        self.qtgui_freq_sink_x_0_0.set_frequency_range(self.freq, 200e3)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq, 200e3)
 
     def get_audio_samp_rate(self):
